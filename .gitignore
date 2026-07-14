@@ -1,0 +1,49 @@
+# dependencies
+node_modules
+
+# production
+dist
+build
+
+# environment
+.env
+.env.local
+.env.development.local
+.env.production.local
+
+# logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+pnpm-debug.log*
+
+# operating system
+.DS_Store
+Thumbs.db
+
+# editor
+.vscode/
+.idea/
+
+# coverage
+coverage/
+
+# cache
+.cache
+.parcel-cache
+
+# misc
+*.swp
+*.swo
+
+# vite
+vite.svg
+
+# uploads
+uploads/
+
+# generated files
+*.zip
+*.tar
+*.gz
