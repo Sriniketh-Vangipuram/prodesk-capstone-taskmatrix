@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useForm } from "react-hook-form";
+import { useForm, useWatch } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import axios from "axios";
 import toast from "react-hot-toast";
@@ -34,13 +34,23 @@ function RegisterForm() {
   const {
     register,
     handleSubmit,
-    watch,
+    control,
     formState: { errors },
   } = useForm<RegisterFormData>({
     resolver: zodResolver(registerSchema),
+    defaultValues: {
+      name: "",
+      email: "",
+      password: "",
+      confirmPassword: "",
+    },
   });
 
-  const password = watch("password");
+  const password = useWatch({
+    control,
+    name: "password",
+    defaultValue: "",
+  });
 
   const onSubmit = (data: RegisterFormData) => {
     setServerError("");
@@ -48,7 +58,6 @@ function RegisterForm() {
     mutate(data, {
       onSuccess: () => {
         toast.success("Account created successfully 🎉");
-
         navigate("/login");
       },
 
@@ -59,14 +68,11 @@ function RegisterForm() {
             "Registration failed";
 
           setServerError(message);
-
           toast.error(message);
-
           return;
         }
 
         setServerError("Something went wrong.");
-
         toast.error("Something went wrong.");
       },
     });
@@ -159,11 +165,7 @@ function RegisterForm() {
               setShowPassword((prev) => !prev)
             }
           >
-            {showPassword ? (
-              <FiEyeOff />
-            ) : (
-              <FiEye />
-            )}
+            {showPassword ? <FiEyeOff /> : <FiEye />}
           </button>
         </div>
 
