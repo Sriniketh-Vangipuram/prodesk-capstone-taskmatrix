@@ -1,12 +1,25 @@
 import { Outlet } from "react-router-dom";
 
+import Sidebar from "../components/layout/Sidebar";
+import Topbar from "../components/layout/Topbar";
+
 function AppLayout() {
   return (
-    <main className="min-h-screen bg-slate-100">
-      <div className="mx-auto max-w-7xl p-6">
-        <Outlet />
+    <div className="flex min-h-screen bg-slate-100">
+      {/* SIDEBAR */}
+
+      <Sidebar />
+
+      {/* MAIN APPLICATION AREA */}
+
+      <div className="flex min-w-0 flex-1 flex-col">
+        <Topbar />
+
+        <main className="min-w-0 flex-1">
+          <Outlet />
+        </main>
       </div>
-    </main>
+    </div>
   );
 }
 
